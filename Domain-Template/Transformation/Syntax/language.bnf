@@ -1,0 +1,27 @@
+USE_LR_PARSER
+
+language
+
+(* ======================================================================================================= *)
+<language>               ::= <stmtlist> .
+<stmtlist>               ::= <stmt> <stmtlist> | .
+<stmt>                   ::= <block> | <dec> ";" | <assignment> ";" | <printstatement> ";" | <iterator> | <conditional> | <increment> ";" .
+<block>                  ::= "{" <stmtlist> "}" .     
+<increment>              ::= "++" id | id "++" | "--" id | id "--" .
+<dec>                    ::= "int" id | "bool" id . 
+<assignment>             ::= id "=" <expr> .
+<printstatement>         ::= "print" "(" <expr> ")". 
+<iterator>               ::= "while" "(" <expr> ")" <block> | "for" "(" <assignment> ";" <expr> ";" <expr> ")" <block>.                                         
+<conditional>            ::= <ifthen> | <ifthenelse> .
+<ifthen>                 ::= "if" "(" <expr> ")" <block> .
+<ifthenelse>             ::= "if" "(" <expr> ")" <block> "else" <block> .
+<expr>                   ::= <logicOr> .
+<logicOr>                ::= <logicOr> "OR" <logicAnd> | <logicAnd> .
+<logicAnd>               ::= <logicAnd> "AND" <equality> | <equality> .
+<equality>               ::= <equality> "==" <relational> | <equality> "!=" <relational> | <relational>	.
+<relational>             ::= <relational> ">" <ArithmeticExpr> | <relational> ">=" <ArithmeticExpr> | <relational> "<" <ArithmeticExpr> | <relational> "<=" <ArithmeticExpr> | <ArithmeticExpr> .
+<ArithmeticExpr>         ::= <ArithmeticExpr> "+" <ArithmeticTerm> | <ArithmeticExpr> "-" <ArithmeticTerm> | <ArithmeticTerm> .
+<ArithmeticTerm>         ::= <ArithmeticTerm> "%" <negation> | <ArithmeticTerm> "/" <negation> | <ArithmeticTerm> "*" <negation> | <negation> .
+<negation>               ::= "!"<exponent> | "-"<exponent> | <exponent> .
+<exponent>               ::= <factor> "^" <exponent> | <factor> .
+<factor>                 ::= integer | boolean | "("<expr>")" | "|"<expr>"|" | <increment> | id .
